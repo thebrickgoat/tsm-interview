@@ -29,7 +29,7 @@ The project will have two pages:
 
 ### Film Card
 
-Each vacation rental card should include an image, a title, and a description. The cards need to be mobile-responsive. Please use a free image from [Unsplash](https://unsplash.com/) as the image for each card.
+Each card should include an image, a title, and a description. The cards need to be mobile-responsive. Please use a free image from [Unsplash](https://unsplash.com/) as the image for each card.
 
 ### Contact Form
 
