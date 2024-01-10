@@ -10,6 +10,7 @@ interface InputProps {
   onChange?: any;
   required?: boolean;
   name: string;
+  placeholder?: string;
   value?: string;
   type: string;
   phoneInput?: boolean;
@@ -43,6 +44,7 @@ const Input = forwardRef<Ref<any>, InputProps>((props, ref: any) => {
     label,
     textarea,
     name = "",
+    placeholder,
     error,
     required,
     type,
@@ -58,14 +60,9 @@ const Input = forwardRef<Ref<any>, InputProps>((props, ref: any) => {
   ) => {
     const { value } = e.target;
     const formattedValue = phoneInput ? formatPhoneNumber(value) : value;
-
     if (phoneInput) {
-      onChange?.({
-        target: {
-          name,
-          value: formattedValue.replace(/\D/g, "").slice(0, 10),
-        },
-      });
+      e.target.value = formattedValue;
+      onChange?.(e);
     } else {
       onChange?.(e);
     }
@@ -78,7 +75,8 @@ const Input = forwardRef<Ref<any>, InputProps>((props, ref: any) => {
         {required && <span className="error-message">*</span>}
       </label>
       <Element
-        className="form-control input"
+        className="form-control input border border-gray-300 rounded-md p-2 w-full"
+        placeholder={placeholder}
         ref={ref}
         name={name}
         type={type}
@@ -86,7 +84,7 @@ const Input = forwardRef<Ref<any>, InputProps>((props, ref: any) => {
         value={phoneInput && value ? formatPhoneNumber(value) : value}
         {...rest}
       />
-      {error && <p className="error-message">{error.message}</p>}
+      {error && <p className="error-message text-red-500">{error.message}</p>}
     </div>
   );
 });
