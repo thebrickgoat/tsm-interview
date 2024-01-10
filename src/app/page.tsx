@@ -5,15 +5,17 @@ import * as React from "react";
 
 import { client } from "../lib/apollo";
 
-export default function Home({ films }: any) {
+export default async function Home() {
+  const data = await getData()
+
   return (
     <Layout>
-      <HomePage films={films}/>
+      <HomePage films={data}/>
     </Layout>
   );
 }
 
-export async function getStaticProps() {
+export async function getData() {
   const GET_FILMS = gql`
     query ExampleQuery {
       allFilms {
@@ -30,11 +32,7 @@ export async function getStaticProps() {
   const { data } = await client.query({
     query: GET_FILMS,
   });
-  return {
-    props: {
-      films: data.allFilms.edges,
-    },
-    revalidate: 1,
-  };
   
+  return data.allFilms.edges;
+
 }
