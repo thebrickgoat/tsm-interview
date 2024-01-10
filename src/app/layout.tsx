@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
- 
+import "@/styles/globals.css";
+
 export const metadata: Metadata = {
     title: "Star Wars Films",
     description: "A list of Star Wars films",

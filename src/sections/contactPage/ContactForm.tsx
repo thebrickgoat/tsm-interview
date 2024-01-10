@@ -1,7 +1,7 @@
 'use client'
-
 import React, { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Input from "@/components/input";
 import * as yup from "yup";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,6 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
-  subject: string;
   message: string;
   phoneNumber: string;
 };
@@ -27,15 +26,13 @@ const schema = yup.object().shape({
       "phone-number-length",
       "Phone number should be 10 digits",
       (value) => {
-        console.log(value);
         return value?.replace(/\D/g, "").length === 10;
       }
     ),
-  subject: yup.string().required("Subject is required"),
   message: yup.string().required("Message is required"),
 });
 
-const ContactInner = () => {
+const ContactInner = () => {  
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, SetShowSuccess] = useState(false);
   const {
@@ -48,14 +45,15 @@ const ContactInner = () => {
     resolver: yupResolver(schema),
   });
 
+  const onInvalid = (errors: any) => console.error(errors)
+
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
-
+    console.log(data);
     try {
-      const { firstName, lastName, email, subject, message, phoneNumber } = data;
+      const { firstName, lastName, email, message, phoneNumber } = data;
 
       const formData = new FormData();
-      formData.set("your-subject", subject);
       formData.set("your-first-name", firstName);
       formData.set("your-last-name", lastName);
       formData.set("your-email", email);
@@ -84,55 +82,74 @@ const ContactInner = () => {
 
   return (
     <section id="contact-form" className="px-6 py-12 bg-slate-300 flex-grow">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-white rounded-lg shadow-lg p-4">
+      <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="space-y-4 bg-white rounded-lg shadow-lg p-4">
         <div>
-          <label htmlFor="firstName" className="block">First Name</label>
-          <input
-            type="text"
+          <Input
             id="firstName"
-            {...register("firstName", { required: true })}
-            className="border border-gray-300 rounded-md p-2 w-full"
-          />
-          {errors.firstName && <span className="text-red-500">{errors.firstName.message}</span>}
-        </div>
-        <div>
-          <label htmlFor="lastName" className="block">Last Name</label>
-          <input
+            label="First Name"
+            textarea={false}
+            error={errors.firstName}
+            required={true}
             type="text"
+            phoneInput={false}
+            placeholder="First Name"
+            {...register("firstName", { required: true })}
+
+          />
+        </div>
+        <div>
+          <Input
             id="lastName"
+            label="Last Name"
+            textarea={false}
+            error={errors.lastName}
+            required={true}
+            type="text"
+            placeholder="Last Name"
             {...register("lastName", { required: true })}
-            className="border border-gray-300 rounded-md p-2 w-full"
           />
-          {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </div>
         <div>
-          <label htmlFor="phone" className="block">Phone</label>
-          <input
+          <Input
+            id="phoneNumber"
+            label="Phone Number"
+            textarea={false}
+            error={errors.phoneNumber}
+            required={true}
             type="tel"
-            id="phone"
+            phoneInput={true}
+            placeholder="(111) 245-3245"
             {...register("phoneNumber", { required: true })}
-            className="border border-gray-300 rounded-md p-2 w-full"
+
           />
-          {errors.phoneNumber && <span className="text-red-500">{errors.phoneNumber.message}</span>}
         </div>
         <div>
-          <label htmlFor="email" className="block">Email</label>
-          <input
-            type="email"
+          <Input
             id="email"
+            label="Email Address"
+            textarea={false}
+            error={errors.email}
+            required={true}
+            type="email"
+            phoneInput={false}
+            placeholder="email@mail.com"
             {...register("email", { required: true })}
-            className="border border-gray-300 rounded-md p-2 w-full"
+
           />
-          {errors.email && <span className="text-red-500">{ errors.email.message }</span>}
         </div>
         <div>
-          <label htmlFor="message" className="block">Message</label>
-          <textarea
+          <Input
             id="message"
+            label="Message"
+            textarea={true}
+            error={errors.message}
+            required={true}
+            type="text"
+            phoneInput={false}
+            placeholder="Let us know how we can help you"
             {...register("message", { required: true })}
-            className="border border-gray-300 rounded-md p-2 w-full"
-          ></textarea>
-          {errors.message && <span className="text-red-500">{ errors.message.message}</span>}
+          />
+
         </div>
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
       </form>

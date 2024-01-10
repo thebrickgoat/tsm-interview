@@ -4,21 +4,21 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-white">
+    <footer className="bg-black">
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigations.map((item) => (
             <Link
               key={item.id}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold leading-6 text-white"
             >
               {item.title}
             </Link>
           ))}
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
-          <p className="text-center text-xs leading-5 text-gray-500">
+          <p className="text-center text-xs leading-5 text-white">
             &copy; {new Date().getFullYear()} {INFO.companyName}, Inc. All
             rights reserved.
           </p>
