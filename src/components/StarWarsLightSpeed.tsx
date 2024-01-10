@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 const StarWarsLightSpeed: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -9,11 +9,25 @@ const StarWarsLightSpeed: React.FC = () => {
     const maxSpeed = 3;
     const minSpeed = 0;
     const speedChange = 0.002;
+
+    // Extracting this into a useCallback to avoid recreating the function
+    const handleResize = useCallback(() => {
+        if (resizeTimeoutRef.current) {
+            clearTimeout(resizeTimeoutRef.current);
+        }
+
+        resizeTimeoutRef.current = setTimeout(() => {
+            const canvas = canvasRef.current;
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        }, 200);
+    }, []);
+
     useEffect(() => {
         const canvas = canvasRef.current;
-
-        if (!canvas) return;
-
+        if (!canvas || !canvas.getContext) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
@@ -34,17 +48,6 @@ const StarWarsLightSpeed: React.FC = () => {
             window.requestAnimationFrame(animate);
         };
 
-        const handleResize = () => {
-            if (resizeTimeoutRef.current) {
-                clearTimeout(resizeTimeoutRef.current);
-            }
-
-            resizeTimeoutRef.current = setTimeout(() => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }, 200);
-        };
-
         window.addEventListener('resize', handleResize);
 
         canvas.width = window.innerWidth;
@@ -58,15 +61,16 @@ const StarWarsLightSpeed: React.FC = () => {
             starsRef.current.push(new Star(loc));
         }
 
-        animate();
+        animate(); 
 
         return () => {
             window.removeEventListener('resize', handleResize);
             if (resizeTimeoutRef.current) {
                 clearTimeout(resizeTimeoutRef.current);
             }
+            // Cancel the animation frame here
         };
-    }, []);
+    }, [handleResize]);
 
     class Star {
         location: { x: number; y: number };
@@ -105,7 +109,7 @@ const StarWarsLightSpeed: React.FC = () => {
                 Math.pow(this.location.x - center.x, 2) +
                 Math.pow(this.location.y - center.y, 2)
             );
-            this.radius = 1 + (3 * distToCenter) / window.innerWidth/2;
+            this.radius = 1 + (3 * distToCenter) / window.innerWidth / 2;
         }
 
         draw(ctx: CanvasRenderingContext2D) {
@@ -131,9 +135,9 @@ const StarWarsLightSpeed: React.FC = () => {
     }
 
     return (
-        <canvas
-            ref={canvasRef}
-            style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}
+        <canvas ref={canvasRef} className="starwars-lightspeed-canvas"
+        style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}
+
         />
     );
 };

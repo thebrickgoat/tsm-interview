@@ -13,7 +13,7 @@ return (
           {subtitle}
         </p>
         {btnText && (
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+          <button className="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-900">
             <a href={btnTarget}>
               {btnText}
             </a>
