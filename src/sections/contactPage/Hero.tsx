@@ -1,5 +1,5 @@
 import StarWarsLightSpeed from "@/components/StarWarsLightSpeed";
-export default function HomeHero({ title, subtitle, btnText, btnTarget }: any) {
+export default function ContactHero({ title, subtitle, btnText, btnTarget }: any) {
   
 return (
     <div className="relative flex flex-col items-center justify-center min-h-48 text-white bg-black">

@@ -8,7 +8,7 @@ import { client } from "../lib/apollo";
 export default function Home({ films }: any) {
   return (
     <Layout>
-      <HomePage />
+      <HomePage films={films}/>
     </Layout>
   );
 }
@@ -30,11 +30,11 @@ export async function getStaticProps() {
   const { data } = await client.query({
     query: GET_FILMS,
   });
-
   return {
     props: {
       films: data.allFilms.edges,
     },
     revalidate: 1,
   };
+  
 }

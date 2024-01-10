@@ -1,11 +1,15 @@
-import Hero from "./Hero";
+import React from "react";
+import HomeHero from "./Hero";
+import FilmList from "./FilmList";
 
-const HomePage = () => {
+export default function HomePage({ films }: any) {
   return (
     <>
-      <Hero />
+      <HomeHero title="May the films be with you"
+       subtitle="a list of the currently exsiting starwars movies"
+       btnText="Show Me"
+       btnTarget="#films" />
+      <FilmList films={films} />
     </>
   );
 };
-
-export default HomePage;
