@@ -4,7 +4,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  ], 
   theme: {
     extend: {
       colors: {
@@ -17,7 +17,7 @@ module.exports = {
       },
 
       fontFamily: {
-        name: ["Roboto", "Arial", "sans-serif"],
+        sans: ['var(--font-open-sans)', ...defaultTheme.fontFamily.sans],
       },
     },
 

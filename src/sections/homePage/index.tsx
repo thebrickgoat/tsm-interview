@@ -11,11 +11,9 @@ export default function HomePage({ films }: any) {
         btnText="Show Me"
         btnTarget="#films"
       />
-      <div className="bg-slate-300">
-        <div className="container mx-auto py-6">
-          <FilmList films={films} />
-        </div>
-      </div>
+
+      <FilmList films={films} />
+
     </>
   );
 }

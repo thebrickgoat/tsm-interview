@@ -2,6 +2,7 @@ import Layout from "@/components/layout/Layout";
 import HomePage from "@/sections/homePage";
 import { gql } from "@apollo/client";
 import * as React from "react";
+import { client } from "../lib/apollo";
 
 export default function Home({ films }: any) {
   return (
