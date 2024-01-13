@@ -21,7 +21,7 @@ export default function FilmList({ films }: any) {
     ];
 
     return (
-        <section id='films' className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6 bg-slate-300">
+        <section id='films' className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {films.map((film: Film, index: number) => (
                 <FilmCard
                     key={film.node.title}
