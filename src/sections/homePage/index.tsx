@@ -6,8 +6,8 @@ export default function HomePage({ films }: any) {
   return (
     <>
       <Hero
-        title="May the films be with you"
-        subtitle="a list of the currently exsiting starwars movies"
+        title="May the Films be with you."
+        subtitle="An up to date list of the currently exsiting starwars feature films."
         btnText="Show Me"
         btnTarget="#films"
       />

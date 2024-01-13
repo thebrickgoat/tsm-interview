@@ -26,8 +26,8 @@ export default function FilmList({ films }: any) {
             <div className="relative h-full w-full bg-slate-950">
                 <div className="container relative z-20 p-12">
 
-                    <h3 className='text-white'>Do or do not. There is no try.</h3>
-                    <p>Yoda</p>
+                    <h3 className='text-white text-3xl copy-h1 font-bold'>Do or do not. There is no try.</h3>
+                    <p className='text-white text-xl mt-4 '>The "Star Wars" movie franchise, created by George Lucas, is a seminal series in the science fiction genre, encompassing a rich tapestry of intergalactic narratives and iconic characters. Below is a list of all known feature films in the franchise.</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mt-12">
                         {films.map((film: Film, index: number) => (
                             <FilmCard
