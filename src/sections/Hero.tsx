@@ -14,7 +14,7 @@ return (
         </p>
         {btnText && (
           <button 
-          className="shadow-xl shadow-blue-500/25 text-white bg-gradient-to-r from-cyan-500 to-indigo-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="shadow-xl shadow-cyan-500/25 text-white bg-gradient-to-r from-cyan-500 to-indigo-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-indigo-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             <a href={btnTarget}>
               {btnText}
